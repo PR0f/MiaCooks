@@ -21,7 +21,7 @@ export default function TabLayout() {
 
       }}>
       <Tabs.Screen
-        name="test"
+        name="index"
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <MaterialIcons name="home" size={28}  color={color} />,
@@ -29,14 +29,14 @@ export default function TabLayout() {
       />
       
       <Tabs.Screen
-        name="index"
+        name="recipes"
         options={{
           title: 'Recipes',
           tabBarIcon: ({ color }) => <MaterialIcons size={28} name="description" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="shopping"
         options={{
           title: 'Shopping',
           tabBarIcon: ({ color }) => <MaterialIcons size={28} name="shopping-cart" color={color} />,
