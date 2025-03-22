@@ -289,43 +289,21 @@ export default function WheelOfFortune() {
     }));
 
 
-
-    //--------
-
-
     const knobSize = 30;
-
-
-
-    const animatedStylesKnob = useAnimatedStyle(() => ({
-
-        transform: [{
-            rotate: interpolate(
-                Math.abs(Math.abs((sv.value % (angleBySegment))) - angleBySegment/ 2  ) / (angleBySegment/2) ,
-                [ 0.0001, 0.6, 0.8, 0.9, 1,],
-                [ 0, 1, 10, 25, 38]
-            ) + 'deg',
-        }],
-    }));
-
-    //-------
-
-
 
     return (
 
 
         <GestureHandlerRootView >
             <View onLayout={onLayout} style={styles.container}>
-                <Animated.View
+                <View
                     style={[
                         {
                             width: knobSize,
                             height: knobSize * 2,
                             justifyContent: 'flex-end',
                             zIndex: 1,
-                        },
-                        animatedStylesKnob
+                        }
                     ]}
                 >
 
@@ -343,7 +321,7 @@ export default function WheelOfFortune() {
                             strokeWidth={2}
                         />
                     </Svg>
-                </Animated.View>
+                </View>
 
                 <GestureDetector gesture={pan}>
                     <Animated.View
