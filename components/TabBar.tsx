@@ -4,6 +4,7 @@ import { ParamListBase, useLinkBuilder, useTheme } from '@react-navigation/nativ
 import { Text, PlatformPressable } from '@react-navigation/elements';
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarButton from './TabBarButton';
+import { router } from 'expo-router';
 
 const TabBar: React.FC<BottomTabBarProps> = ({ state, descriptors, navigation }) => {
     return (
@@ -17,27 +18,28 @@ const TabBar: React.FC<BottomTabBarProps> = ({ state, descriptors, navigation })
                         : route.name;
 
                 const icon = options.tabBarIcon;
+                
 
                 const isFocused = state.index === index;
 
                 const onPress = () => {
-                    const event = navigation.emit({
-                        type: 'tabPress',
-                        target: route.key,
-                        canPreventDefault: true,
-                    });
+                    
 
-                    if (!isFocused && !event.defaultPrevented) {
-                        navigation.navigate(route.name, route.params);
+                    if (!isFocused) {
+                        
+                        //navigation.navigate(route.name, route.params);
+                        console.log(route.name)
+                        router.navigate(route.name, route.params);
                     }
                 };
 
                 const onLongPress = () => {
-                    navigation.emit({
-                        type: 'tabLongPress',
-                        target: route.key,
-                    });
+                    
                 };
+
+                if(options.title == undefined) {
+                    return;
+                }
 
                 return (
                     <TabBarButton 
@@ -52,31 +54,6 @@ const TabBar: React.FC<BottomTabBarProps> = ({ state, descriptors, navigation })
                         />
                 )
 
-                /*return (
-                    <Pressable
-                        key={route.name}
-                        style={styles.tabbarItem}
-                        //href={buildHref(route.name, route.params)}
-                        accessibilityState={isFocused ? { selected: true } : {}}
-                        accessibilityLabel={options.tabBarAccessibilityLabel}
-                        testID={options.tabBarButtonTestID}
-                        onPress={onPress}
-                        onLongPress={onLongPress}
-                    >
-                        {
-
-                            icon?.({
-                                color: isFocused ? "red" : "#222",
-                                focused: false,
-                                size: 26
-                            })
-
-                        }
-                        <Text style={{ color: isFocused ? "red" : "#222" }}>
-                            {label}
-                        </Text>
-                    </Pressable >
-                );*/
             })}
         </View>
     )
@@ -94,11 +71,15 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         borderRadius: 25,
         borderCurve: 'continuous',
+
+        /*
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 10 },
         shadowRadius: 10,
         shadowOpacity: 0.1,
         elevation: 5,
+        */
+        boxShadow: '3 5 5 0 rgba(0, 0, 0, 0.5)',
     },
     
 })

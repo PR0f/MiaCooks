@@ -21,9 +21,10 @@ export default function TabLayout() {
 
       }}>
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           title: 'Home',
+
           tabBarIcon: ({ color }) => <MaterialIcons name="home" size={28}  color={color} />,
         }}
       />
@@ -31,7 +32,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="recipes"
         options={{
-          title: 'Recipes',
+          title: 'Recipes',   
+          headerShown: false,       
           tabBarIcon: ({ color }) => <MaterialIcons size={28} name="description" color={color} />,
         }}
       />
@@ -39,6 +41,7 @@ export default function TabLayout() {
         name="shopping"
         options={{
           title: 'Shopping',
+          href: '/shopping',
           tabBarIcon: ({ color }) => <MaterialIcons size={28} name="shopping-cart" color={color} />,
         }}
       />
@@ -46,6 +49,7 @@ export default function TabLayout() {
         name="account"
         options={{
           title: 'Account',
+          href: '/account',
           tabBarIcon: ({ color }) => <MaterialIcons size={28} name="person" color={color} />,
         }}
       />

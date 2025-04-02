@@ -27,8 +27,20 @@ export default function RootLayout() {
     return null;
   }
 
+
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: 'rgb(119, 119, 119)',
+      primary: 'rgb(255, 136, 0)',
+    },
+  };
+
+  
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={ theme /*colorScheme === 'dark' ? DarkTheme : DefaultTheme*/}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
@@ -37,3 +49,4 @@ export default function RootLayout() {
     </ThemeProvider>
   );
 }
+
