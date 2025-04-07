@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { FC } from 'react';
 import {
+    ColorValue,
     Dimensions,
     StyleSheet,
     Text,
@@ -9,13 +10,132 @@ import {
 } from 'react-native';
 import type { ProgressiveBarProps } from '../constants/typings';
 
+
+type MyTab = {
+    title: any;
+    pageNo: number;
+    onPress?: Function;
+}
+
+const tab = (
+    currentPage: number,
+    tab: MyTab,
+    progressStyle: any,
+    setPage: Function | undefined,
+    titleProps: any
+) => {
+
+
+    return (<View key={tab.pageNo.toString()}
+        style={[
+
+            {
+                alignSelf: 'center',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+            },
+        ]}>
+
+
+
+        {/* step circle */}
+        <TouchableOpacity
+
+            onPress={() =>
+                tab?.onPress
+                    ? tab.onPress(tab.pageNo)
+                    : setPage
+                        ? setPage(tab.pageNo)
+                        : null
+            }
+
+            style={[styles.label]}
+        >
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View
+                    style={[
+                        progressStyle.circle,
+                        {
+                            backgroundColor: tab.pageNo == currentPage
+                                ? finishedBackgroundColor
+                                : inProgressBackgroundColor,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: 50,
+                        },
+                    ]}
+                >
+                    <Text style={[progressStyle.stepNumber,
+                    {
+                        color: tab.pageNo == currentPage
+                            ? inProgressBackgroundColor
+                            : finishedBackgroundColor,
+                    }
+                    ]}>{tab.pageNo + 1}</Text>
+                </View>
+            </View>
+
+            {/* title */}
+            <View style={styles.label}>
+                <Text
+                    {...titleProps}
+                    style={[
+                        progressStyle.stepTitleStyle,
+                        {
+                            color: finishedBackgroundColor
+                                ? finishedBackgroundColor
+                                : inProgressBackgroundColor,
+                            textAlign: 'center',
+                        },
+                    ]}
+                >
+                    {tab.title}
+                </Text>
+            </View>
+        </TouchableOpacity>
+    </View>
+    )
+}
+
+const line = (progressStyle: any) => {
+
+    return (
+        <View
+            style={[
+                progressStyle.lineStyle,
+                {
+                    //backgroundColor: inProgressBackgroundColor
+                    backgroundColor: finishedBackgroundColor
+                        ? finishedBackgroundColor
+                        : inProgressBackgroundColor,
+                },
+            ]}
+        />
+    )
+}
+
+const placeholder = (progressStyle: any) => {
+
+    return (
+        <View
+            style={[
+                progressStyle.lineStyle,
+
+            ]}
+        />
+    )
+}
+
+const finishedBackgroundColor = 'rgb(255, 136, 0)'
+const inProgressBackgroundColor = 'rgb(255, 255, 255)'
+
 const ProgressBar: FC<ProgressiveBarProps> = ({
     page = 1,
     setPage,
     tabs,
     progressive = true,
-    finishedBackgroundColor = 'rgb(57,202,116)',
-    inProgressBackgroundColor = 'rgb(58,153,216)',
+
     circleStyle,
     stepNumberStyle,
     stepTitleStyle,
@@ -23,6 +143,9 @@ const ProgressBar: FC<ProgressiveBarProps> = ({
     titleProps,
     containerStyle,
 }) => {
+
+
+
     const progressStyle = StyleSheet.flatten([
         {
             containerStyle: {
@@ -67,6 +190,26 @@ const ProgressBar: FC<ProgressiveBarProps> = ({
         },
     ]);
 
+    let shiftedPage = page;
+    if (page <= 0) {
+        shiftedPage = page + 1
+    }
+    else if (page >= tabs.length - 1) {
+        shiftedPage = page - 1
+    }
+
+
+    const prevLine = shiftedPage > 0 ? line(progressStyle) : null
+    const nextLine = shiftedPage < tabs.length - 1 ? line(progressStyle) : null
+
+    const prevTab = shiftedPage > 0 ? tab(page, tabs[shiftedPage - 1], progressStyle, setPage, titleProps) : null
+    const nextTab = shiftedPage < tabs.length - 1 ? tab(page, tabs[shiftedPage + 1], progressStyle, setPage, titleProps) : null
+
+    const startLine = shiftedPage > 1 ? line(progressStyle) : placeholder(progressStyle)
+    const endLine = shiftedPage < tabs.length - 2 ? line(progressStyle ) : placeholder(progressStyle)
+
+
+
     return (
         <View
             style={[
@@ -79,128 +222,23 @@ const ProgressBar: FC<ProgressiveBarProps> = ({
                 },
             ]}
         >
-            {
-                tabs.map((e, i) => {
-                    const statusIsFinished = {
-                        circle: progressive ? page > e.pageNo : page === e.pageNo,
-                        line: progressive ? page > e.pageNo : false,
-                    };
-
-
-                    return (
-                        <View key={e.pageNo.toString()}
-                            style={[
-
-                                {
-                                    alignSelf: 'center',
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                },
-                            ]}>
-                            {/* step circle */}
-                            <TouchableOpacity
-
-                                onPress={() =>
-                                    e?.onPress
-                                        ? e.onPress(e.pageNo)
-                                        : setPage
-                                            ? setPage(e.pageNo)
-                                            : null
-                                }
-                                
-                                style={[styles.label]}
-                            >
-                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                    <View
-                                        style={[
-                                            progressStyle.circle,
-                                            {
-                                                backgroundColor: statusIsFinished.circle
-                                                    ? finishedBackgroundColor
-                                                    : inProgressBackgroundColor,
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                                borderRadius: 50,
-                                            },
-                                        ]}
-                                    >
-                                        <Text style={progressStyle.stepNumber}>{i + 1}</Text>
-                                    </View>
-                                </View>
-
-                                {/* title */}
-                                <View style={styles.label}>
-                                    <Text
-                                        {...titleProps}
-                                        style={[
-                                            progressStyle.stepTitleStyle,
-                                            {
-                                                color: statusIsFinished.circle
-                                                    ? finishedBackgroundColor
-                                                    : inProgressBackgroundColor,
-                                                textAlign: 'center',
-                                            },
-                                        ]}
-                                    >
-                                        {e.title}
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-
-
-
-
-                            {i + 1 !== tabs.length && (
-                                <View
-                                    style={[
-                                        progressStyle.lineStyle,
-                                        {
-                                            backgroundColor: statusIsFinished.line
-                                                ? finishedBackgroundColor
-                                                : inProgressBackgroundColor,
-                                        },
-                                    ]}
-                                />
-                            )}
-
-                        </View>
-                    );
-                })
-            }
-
 
             {
-                /*
-                tabs.map((e, i) => {
-                    const statusIsFinished = {
-                        circle: progressive ? page > e.pageNo : page === e.pageNo,
-                        line: progressive ? page > e.pageNo : false,
-                    };
-
-                    return <View key={`line ${i}`}>
-                        {i + 1 !== tabs.length && (
-                            <View
-                                style={[
-                                    progressStyle.lineStyle,
-                                    {
-                                        backgroundColor: statusIsFinished.line
-                                            ? finishedBackgroundColor
-                                            : inProgressBackgroundColor,
-                                    },
-                                ]}
-                            />
-                        )}
-                    </View>
-
-                })
-
-                */
-
+                [
+                    startLine,
+                    prevTab,
+                    prevLine,
+                    tab(page, tabs[shiftedPage], progressStyle, setPage, titleProps),
+                    nextLine,
+                    nextTab,
+                    endLine
+                ]
             }
+
 
         </View>
-    );
+    )
+
 };
 
 export default ProgressBar;
@@ -228,7 +266,7 @@ const styles = StyleSheet.create({
     label: { justifyContent: 'center', alignItems: 'center' },
     line: {
         height: 3,
-        width: 60,
+        width: 40,
         marginHorizontal: 10,
     },
 });

@@ -2,7 +2,7 @@ import { View, StyleSheet, ScrollView, FlatList, TextInput, Image, TouchableOpac
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { ReactNode, useState } from 'react'
 import { Appbar, Avatar, Button, Card, DefaultTheme, Divider, Text } from 'react-native-paper';
-import PagerView from 'react-native-pager-view';
+import PagerView, { PagerViewOnPageSelectedEvent, usePagerView } from 'react-native-pager-view';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import ProgressBar from '@/components/ProgressBar';
@@ -11,13 +11,17 @@ import ProgressBar from '@/components/ProgressBar';
 
 const dynamicRecipes = () => {
 
+    const pagerView = usePagerView();
+
     const { id } = useLocalSearchParams();
 
     const [isRefresing, setRefresing] = useState<boolean>(false);
     const [text, setText] = useState<string>('');
     const [isChipActivated, setChipActivated] = useState<boolean>(false);
 
-    const [page, setPage] = useState<number>(0);
+    const [viewPage, setViewPage] = useState<number>(0);
+
+
 
     type ItemData = {
         id: string;
@@ -199,32 +203,54 @@ const dynamicRecipes = () => {
     return (
 
         <SafeAreaView style={styles.container}>
-            <ProgressBar page={page} progressive={true} setPage={(_page:number) => setPage(_page)} tabs={[
-                {
-                    title: 'Hi',
-                    pageNo: 0,
+            <ProgressBar page={viewPage} progressive={true}
+                setPage={(_page: number) => { setViewPage(_page), pagerView.ref.current?.setPage(_page) }} tabs={[
+                    {
+                        title: 'Hi',
+                        pageNo: 0,
 
-                },
-                {
-                    title: 'Du',
-                    pageNo: 1,
+                    },
+                    {
+                        title: 'Du',
+                        pageNo: 1,
 
-                },
-                {
-                    title: 'Di',
-                    pageNo: 2,
+                    },
+                    {
+                        title: 'Di',
+                        pageNo: 2,
 
-                },
+                    },
+                    {
+                        title: 'Di',
+                        pageNo: 3,
 
-            ]} />
-            <PagerView initialPage={0} style={{ height: '100%' }}>
+                    },
+                    {
+                        title: 'Di',
+                        pageNo: 4,
+
+                    },
+
+                ]} />
+            <pagerView.AnimatedPagerView initialPage={viewPage} style={{ height: '100%' }} ref={pagerView.ref}
+                onPageSelected={(e: PagerViewOnPageSelectedEvent) => { setViewPage(e.nativeEvent.position) }}
+            >
                 <View key="1">
                     <Item title={'cos tam'} id={id as string} picId={0} index={0} />
                 </View>
                 <View key="2">
                     <Item title={'eee tam'} id={'12'} picId={2} index={0} />
                 </View>
-            </PagerView>
+                <View key="3">
+                    <Item title={'aaa tam'} id={'14'} picId={5} index={0} />
+                </View>
+                <View key="4">
+                    <Item title={'aaa tam'} id={'15'} picId={6} index={0} />
+                </View>
+                <View key="5">
+                    <Item title={'aaa tam'} id={'16'} picId={7} index={0} />
+                </View>
+            </pagerView.AnimatedPagerView>
 
 
         </SafeAreaView>
