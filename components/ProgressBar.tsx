@@ -20,11 +20,11 @@ type MyTab = {
 const tab = (
     currentPage: number,
     tab: MyTab,
-    progressStyle: any,
     setPage: Function | undefined,
-    titleProps: any
 ) => {
 
+
+    const isTab =  currentPage >= tab.pageNo
 
     return (<View key={tab.pageNo.toString()}
         style={[
@@ -38,8 +38,6 @@ const tab = (
         ]}>
 
 
-
-        {/* step circle */}
         <TouchableOpacity
 
             onPress={() =>
@@ -55,9 +53,9 @@ const tab = (
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <View
                     style={[
-                        progressStyle.circle,
+                        styles.circle,
                         {
-                            backgroundColor: tab.pageNo == currentPage
+                            backgroundColor: isTab
                                 ? finishedBackgroundColor
                                 : inProgressBackgroundColor,
                             justifyContent: 'center',
@@ -66,9 +64,9 @@ const tab = (
                         },
                     ]}
                 >
-                    <Text style={[progressStyle.stepNumber,
+                    <Text style={[styles.stepNoText,
                     {
-                        color: tab.pageNo == currentPage
+                        color: isTab
                             ? inProgressBackgroundColor
                             : finishedBackgroundColor,
                     }
@@ -76,13 +74,12 @@ const tab = (
                 </View>
             </View>
 
-            {/* title */}
+
             <View style={styles.label}>
                 <Text
-                    {...titleProps}
                     style={[
-                        progressStyle.stepTitleStyle,
                         {
+                            fontWeight: 'bold',
                             color: finishedBackgroundColor
                                 ? finishedBackgroundColor
                                 : inProgressBackgroundColor,
@@ -98,14 +95,13 @@ const tab = (
     )
 }
 
-const line = (progressStyle: any) => {
+const line = () => {
 
     return (
         <View
             style={[
-                progressStyle.lineStyle,
+                styles.line,
                 {
-                    //backgroundColor: inProgressBackgroundColor
                     backgroundColor: finishedBackgroundColor
                         ? finishedBackgroundColor
                         : inProgressBackgroundColor,
@@ -115,14 +111,11 @@ const line = (progressStyle: any) => {
     )
 }
 
-const placeholder = (progressStyle: any) => {
+const placeholder = () => {
 
     return (
         <View
-            style={[
-                progressStyle.lineStyle,
-
-            ]}
+            style={styles.line}
         />
     )
 }
@@ -131,64 +124,11 @@ const finishedBackgroundColor = 'rgb(255, 136, 0)'
 const inProgressBackgroundColor = 'rgb(255, 255, 255)'
 
 const ProgressBar: FC<ProgressiveBarProps> = ({
-    page = 1,
+    page = 0,
     setPage,
     tabs,
-    progressive = true,
-
-    circleStyle,
-    stepNumberStyle,
-    stepTitleStyle,
-    lineStyle,
-    titleProps,
-    containerStyle,
 }) => {
-
-
-
-    const progressStyle = StyleSheet.flatten([
-        {
-            containerStyle: {
-                width: containerStyle?.width
-                    ? containerStyle.width
-                    : styles.container.width,
-                height: containerStyle?.height
-                    ? containerStyle.height
-                    : styles.container.height,
-                marginTop: containerStyle?.marginTop
-                    ? containerStyle.marginTop
-                    : styles.container.marginTop,
-            },
-            circle: {
-                width: circleStyle?.width ? circleStyle.width : styles.circle.width,
-                height: circleStyle?.height ? circleStyle.height : styles.circle.height,
-            },
-            stepNumber: {
-                fontSize: stepNumberStyle?.fontSize
-                    ? stepNumberStyle.fontSize
-                    : styles.stepNoText.fontSize,
-                fontWeight: stepNumberStyle?.fontWeight
-                    ? stepNumberStyle.fontWeight
-                    : styles.stepNoText.fontWeight,
-                color: stepNumberStyle?.color
-                    ? stepNumberStyle.color
-                    : styles.stepNoText.color,
-            },
-            stepTitleStyle: {
-                fontSize: stepTitleStyle?.fontSize && stepTitleStyle.fontSize,
-                fontWeight: stepTitleStyle?.fontWeight
-                    ? stepTitleStyle.fontWeight
-                    : 'bold',
-            },
-            lineStyle: {
-                width: lineStyle?.width ? lineStyle.width : styles.line.width,
-                height: lineStyle?.height ? lineStyle.height : styles.line.height,
-                marginHorizontal: lineStyle?.marginHorizontal
-                    ? lineStyle.marginHorizontal
-                    : 10,
-            },
-        },
-    ]);
+    
 
     let shiftedPage = page;
     if (page <= 0) {
@@ -199,21 +139,21 @@ const ProgressBar: FC<ProgressiveBarProps> = ({
     }
 
 
-    const prevLine = shiftedPage > 0 ? line(progressStyle) : null
-    const nextLine = shiftedPage < tabs.length - 1 ? line(progressStyle) : null
+    const prevLine = shiftedPage > 0 ? line() : null
+    const nextLine = shiftedPage < tabs.length - 1 ? line() : null
 
-    const prevTab = shiftedPage > 0 ? tab(page, tabs[shiftedPage - 1], progressStyle, setPage, titleProps) : null
-    const nextTab = shiftedPage < tabs.length - 1 ? tab(page, tabs[shiftedPage + 1], progressStyle, setPage, titleProps) : null
+    const prevTab = shiftedPage > 0 ? tab(page, tabs[shiftedPage - 1], setPage) : null
+    const nextTab = shiftedPage < tabs.length - 1 ? tab(page, tabs[shiftedPage + 1], setPage) : null
 
-    const startLine = shiftedPage > 1 ? line(progressStyle) : placeholder(progressStyle)
-    const endLine = shiftedPage < tabs.length - 2 ? line(progressStyle ) : placeholder(progressStyle)
+    const startLine = shiftedPage > 1 ? line() : placeholder()
+    const endLine = shiftedPage < tabs.length - 2 ? line( ) : placeholder()
 
 
 
     return (
         <View
             style={[
-                progressStyle.containerStyle,
+                styles.container,
                 {
                     alignSelf: 'center',
                     flexDirection: 'row',
@@ -228,7 +168,7 @@ const ProgressBar: FC<ProgressiveBarProps> = ({
                     startLine,
                     prevTab,
                     prevLine,
-                    tab(page, tabs[shiftedPage], progressStyle, setPage, titleProps),
+                    tab(page, tabs[shiftedPage], setPage),
                     nextLine,
                     nextTab,
                     endLine

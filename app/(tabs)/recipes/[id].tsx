@@ -203,30 +203,30 @@ const dynamicRecipes = () => {
     return (
 
         <SafeAreaView style={styles.container}>
-            <ProgressBar page={viewPage} progressive={true}
+            <ProgressBar page={viewPage} 
                 setPage={(_page: number) => { setViewPage(_page), pagerView.ref.current?.setPage(_page) }} tabs={[
                     {
-                        title: 'Hi',
+                        title: 'a',
                         pageNo: 0,
 
                     },
                     {
-                        title: 'Du',
+                        title: 'b',
                         pageNo: 1,
 
                     },
                     {
-                        title: 'Di',
+                        title: 'c',
                         pageNo: 2,
 
                     },
                     {
-                        title: 'Di',
+                        title: 'd',
                         pageNo: 3,
 
                     },
                     {
-                        title: 'Di',
+                        title: 'e',
                         pageNo: 4,
 
                     },
@@ -236,19 +236,19 @@ const dynamicRecipes = () => {
                 onPageSelected={(e: PagerViewOnPageSelectedEvent) => { setViewPage(e.nativeEvent.position) }}
             >
                 <View key="1">
-                    <Item title={'cos tam'} id={id as string} picId={0} index={0} />
+                    <Item title={'aaa tam'} id={id as string} picId={0} index={0} />
                 </View>
                 <View key="2">
-                    <Item title={'eee tam'} id={'12'} picId={2} index={0} />
+                    <Item title={'bbb tam'} id={'12'} picId={2} index={0} />
                 </View>
                 <View key="3">
-                    <Item title={'aaa tam'} id={'14'} picId={5} index={0} />
+                    <Item title={'ccc tam'} id={'14'} picId={5} index={0} />
                 </View>
                 <View key="4">
-                    <Item title={'aaa tam'} id={'15'} picId={6} index={0} />
+                    <Item title={'ddd tam'} id={'15'} picId={6} index={0} />
                 </View>
                 <View key="5">
-                    <Item title={'aaa tam'} id={'16'} picId={7} index={0} />
+                    <Item title={'eee tam'} id={'16'} picId={7} index={0} />
                 </View>
             </pagerView.AnimatedPagerView>
 
