@@ -127,6 +127,7 @@ const ProgressBar: FC<ProgressiveBarProps> = ({
     page = 0,
     setPage,
     tabs,
+    style,
 }) => {
     
 
@@ -153,6 +154,7 @@ const ProgressBar: FC<ProgressiveBarProps> = ({
     return (
         <View
             style={[
+                style,
                 styles.container,
                 {
                     alignSelf: 'center',
@@ -193,14 +195,14 @@ const styles = StyleSheet.create({
 
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 10,
+        
     },
     circle: {
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 50,
-        width: 56,
-        height: 56,
+        width: 48,
+        height: 48,
     },
     stepNoText: { color: 'white', fontWeight: 'bold', fontSize: 22 },
     label: { justifyContent: 'center', alignItems: 'center' },

@@ -6,6 +6,7 @@ import PagerView, { PagerViewOnPageSelectedEvent, usePagerView } from 'react-nat
 import { MaterialIcons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import ProgressBar from '@/components/ProgressBar';
+import ParallaxScrollView from '@/components/ParallaxScrollView';
 
 
 
@@ -203,52 +204,128 @@ const dynamicRecipes = () => {
     return (
 
         <SafeAreaView style={styles.container}>
-            <ProgressBar page={viewPage} 
-                setPage={(_page: number) => { setViewPage(_page), pagerView.ref.current?.setPage(_page) }} tabs={[
-                    {
-                        title: 'a',
-                        pageNo: 0,
+            <View>
+                <ProgressBar page={viewPage} style={{ position: 'absolute', zIndex: 10, }}
+                    setPage={(_page: number) => { setViewPage(_page), pagerView.ref.current?.setPage(_page) }} tabs={[
+                        {
+                            title: 'a',
+                            pageNo: 0,
 
-                    },
-                    {
-                        title: 'b',
-                        pageNo: 1,
+                        },
+                        {
+                            title: 'b',
+                            pageNo: 1,
 
-                    },
-                    {
-                        title: 'c',
-                        pageNo: 2,
+                        },
+                        {
+                            title: 'c',
+                            pageNo: 2,
 
-                    },
-                    {
-                        title: 'd',
-                        pageNo: 3,
+                        },
+                        {
+                            title: 'd',
+                            pageNo: 3,
 
-                    },
-                    {
-                        title: 'e',
-                        pageNo: 4,
+                        },
+                        {
+                            title: 'e',
+                            pageNo: 4,
 
-                    },
+                        },
 
-                ]} />
+                    ]} />
+            </View>
             <pagerView.AnimatedPagerView initialPage={viewPage} style={{ height: '100%' }} ref={pagerView.ref}
                 onPageSelected={(e: PagerViewOnPageSelectedEvent) => { setViewPage(e.nativeEvent.position) }}
             >
                 <View key="1">
-                    <Item title={'aaa tam'} id={id as string} picId={0} index={0} />
+                    <ParallaxScrollView
+                        headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+                        headerImage={
+                            <Image
+                                style={[styles.logo, {
+
+                                    height: 700,
+                                    width: 700
+                                }]}
+                                source={require('../../../assets/images/mockup/67740871-v-720x720.jpg')}
+                            />
+                        }>
+                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Makaron z twarogiem</Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Makaron z twarogiem na słono jest daniem, które można modyfikować na wiele sposobów. Możesz tu użyć dowolnego makaronu, np. spaghetti, czy też penne lub tagliatelle. Jeśli zaś chodzi o dodatki, to olej z powodzeniem zastąpisz boczkiem lub słoniną pokrojoną w małą kosteczkę. Cebulę można pominąć lub dodać do niej jeszcze ulubioną kiełbasę. Po szczegóły zapraszam jednak do przepisu poniżej.</Text>
+                    </ParallaxScrollView>
                 </View>
                 <View key="2">
-                    <Item title={'bbb tam'} id={'12'} picId={2} index={0} />
+                    <ParallaxScrollView
+                        headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+                        headerImage={
+                            <Image
+                                style={[styles.logo, {
+
+                                    height: 700,
+                                    width: 700
+                                }]}
+                                source={require('../../../assets/images/mockup/67740893-v-1080x1080.jpg')}
+                            />
+                        }>
+                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Makaron z twarogiem</Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Makaron z twarogiem i cebulką to pyszne, błyskawiczne i proste do zrobienia danie, które przez wielu moich Czytelników może być kojarzone z dzieciństwem. To bardzo elastyczny przepis, o czym przekonacie się czytając jego treść.</Text>
+                    </ParallaxScrollView>
                 </View>
                 <View key="3">
-                    <Item title={'ccc tam'} id={'14'} picId={5} index={0} />
+                    <ParallaxScrollView
+                        headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+                        headerImage={
+                            <Image
+                                style={[styles.logo, {
+
+                                    height: 700,
+                                    width: 700
+                                }]}
+                                source={require('../../../assets/images/mockup/67740880-v-1080x1080.jpg')}
+                            />
+                        }>
+                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Krok 1: Podsmaż cebulkę</Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Nagrzej większą patelnię z grubym dnem. Wylej na nią około 70 ml oleju roślinnego do smażenia i wyłóż obrane i drobno posiekane cebule (300 g  - najlepiej cukrowe). Cebulę smaż na takiej mocy palnika, by najpierw się zeszkliła, potem zaś lekko zarumieniła. U mnie trwało to około 15 minut. Pod koniec dodaj garść świeżo siekanego szczypiorku (można go pominąć) oraz sól (jeśli planujesz dodawać słony boczek, to uważaj z jej ilością).
+
+                            Porady: Cześć lub całość oleju można zastąpić pokrojoną w drobną kostkę słoniną lub ładnym podgardlem (powstaną Ci pyszne skwarki) albo też boczkiem (polecam surowy wędzony). Pod koniec można tez dołożyć kawałek pokrojonej w półplasterki kiełbasy. </Text>
+                    </ParallaxScrollView>
                 </View>
                 <View key="4">
-                    <Item title={'ddd tam'} id={'15'} picId={6} index={0} />
+                    <ParallaxScrollView
+                        headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+                        headerImage={
+                            <Image
+                                style={[styles.logo, {
+
+                                    height: 700,
+                                    width: 700
+                                }]}
+                                source={require('../../../assets/images/mockup/67740932-v-1080x1506.jpg')}
+                            />
+                        }>
+                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Krok 2: Ugotuj makaron</Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>W trakcie smażenia cebuli ugotuj makaron. Wybrałam makaron pszenny świderki, ale możesz też sięgnąć po makaron spaghetti, tagliatelle, czy też w kształcie kokardek, muszelek, rurek czy piórek. Do garnka wlej wodę i zagotuj. Na ugotowanie 300 gramów suchego makaronu potrzebujesz 3 l wody. Wodę posól dopiero, gdy zacznie się gotować. Do wrzątku wsyp płaską łyżeczkę soli. W garnku umieść makaron i gotuj al dente według zaleceń z opakowania. W trakcie gotowania zamieszaj makaron. Ugotowany makaron przełóż na durszlak w zlewie a potem do miski. Tym razem wyszło mi około 720 gramów ugotowanego makaronu.
+
+                            Porada: Makaron pszenny można śmiało wymienić na makaron pełnoziarnisty pszenny lub pszenny orkiszowy albo gryczany. </Text>
+                    </ParallaxScrollView>
                 </View>
                 <View key="5">
-                    <Item title={'eee tam'} id={'16'} picId={7} index={0} />
+                    <ParallaxScrollView
+                        headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+                        headerImage={
+                            <Image
+                                style={[styles.logo, {
+
+                                    height: 700,
+                                    width: 700
+                                }]}
+                                source={require('../../../assets/images/mockup/67740871-v-720x720.jpg')}
+                            />
+                        }>
+                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Krok 3: Całość podawaj z twarogiem</Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Na ugotowany makaron wyłóż całą zawartość patelni, a następnie pokruszony w dłoniach twaróg (u mnie chudy, ale może być też tłustszy lub twaróg typu krajanka). Dopiero gotowe danie oprósz świeżo mielonym pieprzem i podawaj. </Text>
+                    </ParallaxScrollView>
                 </View>
             </pagerView.AnimatedPagerView>
 
