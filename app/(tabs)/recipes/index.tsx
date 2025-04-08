@@ -135,7 +135,7 @@ const account = () => {
       onPress={
         () => {
           console.log(item.title)
-          router.push({pathname: '/recipes/[id]', params: { id: item.id}})
+          router.push({ pathname: '/recipes/[id]', params: { id: item.id } })
           //router.navigate('/',  { id: 'bacon' } )
         }
       }
@@ -154,7 +154,7 @@ const account = () => {
       <View style={{
         width: '90%',
         flexDirection: 'column',
-        flexGrow: 1,
+
         justifyContent: 'space-between',
         paddingTop: 10,
         paddingLeft: 20,
@@ -167,26 +167,56 @@ const account = () => {
           <Text style={[styles.cardText,]} variant="titleLarge">{item.title}</Text>
 
           <View style={{
-            flexDirection: 'row',
-            alignContent: 'space-evenly',
-
-
+            padding: 3
           }}>
-            <Text style={[{ color: 'rgb(255, 255, 255)', flex: 1 }]} variant="bodyMedium">1 hr 10 min</Text>
-            <Text style={[{ color: 'rgb(255, 255, 255)', flex: 1 }]} variant="bodyMedium">195 kcal</Text>
-          </View>
 
+
+
+            <View style={{
+              flexDirection: 'row',
+              alignItems: 'flex-start',
+              alignSelf: 'flex-start',
+              paddingTop: 3
+            }}>
+
+              <View style={{
+                flexDirection: 'row',
+                flex: 1
+              }}>
+                <MaterialIcons size={26} name="schedule" color={'rgb(255, 255, 255)'} />
+                <Text style={[{ color: 'rgb(255, 255, 255)' }]} variant="bodyMedium">30min</Text>
+              </View>
+
+              <View style={{
+                flexDirection: 'row',
+                flex: 1
+              }}>
+                <MaterialIcons size={26} name="restaurant" color={'rgb(255, 255, 255)'} />
+                <Text style={[{ color: 'rgb(255, 255, 255)' }]} variant="bodyMedium">195 kcal</Text>
+              </View>
+
+            </View>
+
+            <View style={{
+              flexDirection: 'row',
+              paddingTop: 6
+              
+            }}>
+              <MaterialIcons size={26} name="pages" color={'rgb(255, 255, 255)'} />
+              <Text style={[{ color: 'rgb(255, 255, 255)' }]} variant="bodyMedium">6</Text>
+            </View>
+          </View>
         </View>
 
         <View style={{
           flexDirection: 'row',
           alignContent: 'space-evenly',
-          
+
 
         }}>
-          <MaterialIcons size={26} name="share" color={'rgb(255, 136, 0)'} style={{  flex: 1 }} />
-          <MaterialIcons size={26} name="shopping-cart" color={'rgb(255, 136, 0)'} style={{  flex: 1 }} />
-          <MaterialIcons size={26} name="favorite" color={'rgb(255, 136, 0)'} style={{  flex: 1 }} />
+          <MaterialIcons size={26} name="share" color={'rgb(255, 136, 0)'} style={{ flex: 1 }} />
+          <MaterialIcons size={26} name="shopping-cart" color={'rgb(255, 136, 0)'} style={{ flex: 1 }} />
+          <MaterialIcons size={26} name="favorite" color={'rgb(255, 136, 0)'} style={{ flex: 1 }} />
         </View>
 
       </View>
@@ -201,58 +231,36 @@ const account = () => {
   )
 
 
-  /*
-        <Card style={styles.card} onPress={() => console.log(item.title)}>
-   
-   
-          <Card.Cover style={styles.cover} source={{ uri: 'https://picsum.photos/700' }} />
-          <Card.Content >
-            <Text style={styles.cardText} variant="titleLarge">{item.title}</Text>
-            <Text style={[styles.cardText, { color: 'rgb(255, 255, 255)' }]} variant="bodyMedium">asdsad</Text>
-          </Card.Content>
-   
-        </Card>
-        */
-  /*
-   
-  <PagerView style={styles.container} initialPage={0}>
-        </PagerView>
-   
-   
-        <ScrollView horizontal={true}>
-  */
-
-
   const DATA = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
       title: 'First Item',
-      picId: 10
+      picId: 292
     },
     {
       id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
       title: 'Second Item',
-      picId: 23
+      picId: 312
     },
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d72',
       title: 'Third Item',
-      picId: 22
+      picId: 488
     },
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d73',
       title: '4 Item',
-      picId: 28
+      picId: 493
     },
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d74',
       title: '5 Item',
-      picId: 35
+      picId: 835
     },
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d75',
       title: '6 Item',
-      picId: 111
+      picId: 1080
     },
   ];
 
@@ -260,8 +268,6 @@ const account = () => {
 
 
   return (
-
-
 
     <SafeAreaView style={styles.container}>
 
@@ -322,28 +328,10 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
 
   },
-  cover: {
-
-  },
-  card: {
-    //boxShadow: '3 5 5 0 rgba(0, 0, 0, 0.5)',
-
-
-
-
-
-
-    /*shadowColor: 'black',
-    shadowOffset: { width: 0, height: 10 },
-    shadowRadius: 10,
-    shadowOpacity: 0.1,
-    elevation: 5,*/
-  },
   cardText: {
-    color: 'rgb(0, 0, 0)',
+    color: 'rgb(255, 255, 255)',
     //textAlign: 'center',
     fontWeight: 'bold',
-
   },
   header: {
     backgroundColor: 'rgb(119, 119, 119)',
@@ -351,9 +339,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   logo: {
-
     resizeMode: 'contain',
-
   },
 
 });

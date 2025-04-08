@@ -3,28 +3,26 @@ import React, { FC } from 'react';
 import {
     ColorValue,
     Dimensions,
+    StyleProp,
     StyleSheet,
     Text,
     TouchableOpacity,
     View,
+    ViewStyle,
 } from 'react-native';
-import type { ProgressiveBarProps } from '../constants/typings';
 
 
-type MyTab = {
-    title: any;
-    pageNo: number;
-    onPress?: Function;
-}
+
+
 
 const tab = (
     currentPage: number,
-    tab: MyTab,
+    tab: Tab,
     setPage: Function | undefined,
 ) => {
 
 
-    const isTab =  currentPage >= tab.pageNo
+    const isTab = currentPage >= tab.pageNo
 
     return (<View key={tab.pageNo.toString()}
         style={[
@@ -75,6 +73,8 @@ const tab = (
             </View>
 
 
+            {
+            /* Text under circle
             <View style={styles.label}>
                 <Text
                     style={[
@@ -87,9 +87,11 @@ const tab = (
                         },
                     ]}
                 >
-                    {tab.title}
+                    {tab?.title}
                 </Text>
             </View>
+
+                */}
         </TouchableOpacity>
     </View>
     )
@@ -129,7 +131,7 @@ const ProgressBar: FC<ProgressiveBarProps> = ({
     tabs,
     style,
 }) => {
-    
+
 
     let shiftedPage = page;
     if (page <= 0) {
@@ -147,7 +149,7 @@ const ProgressBar: FC<ProgressiveBarProps> = ({
     const nextTab = shiftedPage < tabs.length - 1 ? tab(page, tabs[shiftedPage + 1], setPage) : null
 
     const startLine = shiftedPage > 1 ? line() : placeholder()
-    const endLine = shiftedPage < tabs.length - 2 ? line( ) : placeholder()
+    const endLine = shiftedPage < tabs.length - 2 ? line() : placeholder()
 
 
 
@@ -156,16 +158,18 @@ const ProgressBar: FC<ProgressiveBarProps> = ({
             style={[
                 style,
                 styles.container,
-                {
-                    alignSelf: 'center',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                },
             ]}
         >
 
-            {
+            {startLine}
+            {prevTab}
+            {prevLine}
+            {tab(page, tabs[shiftedPage], setPage)}
+            {nextLine}
+            {nextTab}
+            {endLine}
+
+            {/*
                 [
                     startLine,
                     prevTab,
@@ -175,6 +179,7 @@ const ProgressBar: FC<ProgressiveBarProps> = ({
                     nextTab,
                     endLine
                 ]
+                    */
             }
 
 
@@ -188,14 +193,14 @@ export default ProgressBar;
 const styles = StyleSheet.create({
     container: {
         width: Dimensions.get('screen').width,
-        height: Dimensions.get('screen').height / 10,
+        height: 48 + 30,
 
         alignSelf: 'center',
         flexDirection: 'row',
 
         alignItems: 'center',
         justifyContent: 'center',
-        
+
     },
     circle: {
         justifyContent: 'center',
@@ -212,3 +217,19 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
 });
+
+interface Tab {
+    title?: string;
+    pageNo: number;
+    onPress?: Function;
+}
+
+
+export interface ProgressiveBarProps {
+    page: number;
+    setPage?: Function;
+    tabs: Tab[];
+
+    titleProps?: object;
+    style?: StyleProp<ViewStyle> | undefined;
+}

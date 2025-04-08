@@ -205,31 +205,36 @@ const dynamicRecipes = () => {
 
         <SafeAreaView style={styles.container}>
             <View>
-                <ProgressBar page={viewPage} style={{ position: 'absolute', zIndex: 10, }}
+                <ProgressBar page={viewPage} style={{ zIndex: 10, backgroundColor: 'black' }}
                     setPage={(_page: number) => { setViewPage(_page), pagerView.ref.current?.setPage(_page) }} tabs={[
                         {
-                            title: 'a',
+
                             pageNo: 0,
 
                         },
                         {
-                            title: 'b',
+
                             pageNo: 1,
 
                         },
                         {
-                            title: 'c',
+
                             pageNo: 2,
 
                         },
                         {
-                            title: 'd',
+
                             pageNo: 3,
 
                         },
                         {
-                            title: 'e',
+
                             pageNo: 4,
+
+                        },
+                        {
+
+                            pageNo: 5,
 
                         },
 
@@ -245,14 +250,64 @@ const dynamicRecipes = () => {
                             <Image
                                 style={[styles.logo, {
 
-                                    height: 700,
+                                    height: 200,
                                     width: 700
                                 }]}
                                 source={require('../../../assets/images/mockup/67740871-v-720x720.jpg')}
                             />
                         }>
-                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Makaron z twarogiem</Text>
-                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Makaron z twarogiem na słono jest daniem, które można modyfikować na wiele sposobów. Możesz tu użyć dowolnego makaronu, np. spaghetti, czy też penne lub tagliatelle. Jeśli zaś chodzi o dodatki, to olej z powodzeniem zastąpisz boczkiem lub słoniną pokrojoną w małą kosteczkę. Cebulę można pominąć lub dodać do niej jeszcze ulubioną kiełbasę. Po szczegóły zapraszam jednak do przepisu poniżej.</Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)', fontSize: 22 }]}>Makaron z twarogiem</Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)', fontSize: 20 }]}>Składniki</Text>
+                        <View style={{
+                            backgroundColor: 'rgb(255, 255, 255)',
+                            borderRadius: 20,
+                            borderCurve: 'continuous',
+                            padding: 3,
+                            justifyContent: 'space-around',
+                            alignItems: 'center',
+                            alignSelf: 'center',
+                            flexDirection: 'row',
+
+                            width: '100%'
+                        }}>
+                            <Image
+                                style={[{
+
+                                    height: 70,
+                                    width: 70
+                                }]}
+                                source={require('../../../assets/images/mockup/ilustracja-tagliatelle-maksta-cartoon-vector-kreskówka-z-włoski-sos-surowe-gotowane-gniazdo-makaron-food-250913549.webp')}>
+
+                            </Image>
+                            <Text>makaron suchy np. świderki</Text>
+                            <Text>300 g</Text>
+                        </View>
+
+                        <View style={{
+                            backgroundColor: 'rgb(255, 255, 255)',
+                            borderRadius: 20,
+                            borderCurve: 'continuous',
+                            padding: 3,
+                            justifyContent: 'space-around',
+                            alignItems: 'center',
+                            alignSelf: 'center',
+                            flexDirection: 'row',
+
+                            width: '100%'
+                        }}>
+                            <Image
+                                style={[{
+
+                                    height: 70,
+                                    width: 70
+                                }]}
+                                source={require('../../../assets/images/mockup/ilustracja-tagliatelle-maksta-cartoon-vector-kreskówka-z-włoski-sos-surowe-gotowane-gniazdo-makaron-food-250913549.webp')}>
+
+                            </Image>
+                            <Text>twaróg np. chudy</Text>
+                            <Text>250 g</Text>
+                        </View>
+
                     </ParallaxScrollView>
                 </View>
                 <View key="2">
@@ -265,11 +320,11 @@ const dynamicRecipes = () => {
                                     height: 700,
                                     width: 700
                                 }]}
-                                source={require('../../../assets/images/mockup/67740893-v-1080x1080.jpg')}
+                                source={require('../../../assets/images/mockup/67740871-v-720x720.jpg')}
                             />
                         }>
-                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Makaron z twarogiem</Text>
-                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Makaron z twarogiem i cebulką to pyszne, błyskawiczne i proste do zrobienia danie, które przez wielu moich Czytelników może być kojarzone z dzieciństwem. To bardzo elastyczny przepis, o czym przekonacie się czytając jego treść.</Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)', fontSize: 22 }]}>Makaron z twarogiem</Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)', fontSize: 16 }]}>Makaron z twarogiem na słono jest daniem, które można modyfikować na wiele sposobów. Możesz tu użyć dowolnego makaronu, np. spaghetti, czy też penne lub tagliatelle. Jeśli zaś chodzi o dodatki, to olej z powodzeniem zastąpisz boczkiem lub słoniną pokrojoną w małą kosteczkę. Cebulę można pominąć lub dodać do niej jeszcze ulubioną kiełbasę. Po szczegóły zapraszam jednak do przepisu poniżej.</Text>
                     </ParallaxScrollView>
                 </View>
                 <View key="3">
@@ -282,13 +337,11 @@ const dynamicRecipes = () => {
                                     height: 700,
                                     width: 700
                                 }]}
-                                source={require('../../../assets/images/mockup/67740880-v-1080x1080.jpg')}
+                                source={require('../../../assets/images/mockup/67740893-v-1080x1080.jpg')}
                             />
                         }>
-                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Krok 1: Podsmaż cebulkę</Text>
-                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Nagrzej większą patelnię z grubym dnem. Wylej na nią około 70 ml oleju roślinnego do smażenia i wyłóż obrane i drobno posiekane cebule (300 g  - najlepiej cukrowe). Cebulę smaż na takiej mocy palnika, by najpierw się zeszkliła, potem zaś lekko zarumieniła. U mnie trwało to około 15 minut. Pod koniec dodaj garść świeżo siekanego szczypiorku (można go pominąć) oraz sól (jeśli planujesz dodawać słony boczek, to uważaj z jej ilością).
-
-                            Porady: Cześć lub całość oleju można zastąpić pokrojoną w drobną kostkę słoniną lub ładnym podgardlem (powstaną Ci pyszne skwarki) albo też boczkiem (polecam surowy wędzony). Pod koniec można tez dołożyć kawałek pokrojonej w półplasterki kiełbasy. </Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)', fontSize: 22 }]}>Makaron z twarogiem</Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)', fontSize: 16 }]}>Makaron z twarogiem i cebulką to pyszne, błyskawiczne i proste do zrobienia danie, które przez wielu moich Czytelników może być kojarzone z dzieciństwem. To bardzo elastyczny przepis, o czym przekonacie się czytając jego treść.</Text>
                     </ParallaxScrollView>
                 </View>
                 <View key="4">
@@ -301,13 +354,13 @@ const dynamicRecipes = () => {
                                     height: 700,
                                     width: 700
                                 }]}
-                                source={require('../../../assets/images/mockup/67740932-v-1080x1506.jpg')}
+                                source={require('../../../assets/images/mockup/67740880-v-1080x1080.jpg')}
                             />
                         }>
-                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Krok 2: Ugotuj makaron</Text>
-                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>W trakcie smażenia cebuli ugotuj makaron. Wybrałam makaron pszenny świderki, ale możesz też sięgnąć po makaron spaghetti, tagliatelle, czy też w kształcie kokardek, muszelek, rurek czy piórek. Do garnka wlej wodę i zagotuj. Na ugotowanie 300 gramów suchego makaronu potrzebujesz 3 l wody. Wodę posól dopiero, gdy zacznie się gotować. Do wrzątku wsyp płaską łyżeczkę soli. W garnku umieść makaron i gotuj al dente według zaleceń z opakowania. W trakcie gotowania zamieszaj makaron. Ugotowany makaron przełóż na durszlak w zlewie a potem do miski. Tym razem wyszło mi około 720 gramów ugotowanego makaronu.
+                        <Text style={[{ color: 'rgb(255, 255, 255)', fontSize: 22 }]}>Krok 1: Podsmaż cebulkę</Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)', fontSize: 16 }]}>Nagrzej większą patelnię z grubym dnem. Wylej na nią około 70 ml oleju roślinnego do smażenia i wyłóż obrane i drobno posiekane cebule (300 g  - najlepiej cukrowe). Cebulę smaż na takiej mocy palnika, by najpierw się zeszkliła, potem zaś lekko zarumieniła. U mnie trwało to około 15 minut. Pod koniec dodaj garść świeżo siekanego szczypiorku (można go pominąć) oraz sól (jeśli planujesz dodawać słony boczek, to uważaj z jej ilością).
 
-                            Porada: Makaron pszenny można śmiało wymienić na makaron pełnoziarnisty pszenny lub pszenny orkiszowy albo gryczany. </Text>
+                            Porady: Cześć lub całość oleju można zastąpić pokrojoną w drobną kostkę słoniną lub ładnym podgardlem (powstaną Ci pyszne skwarki) albo też boczkiem (polecam surowy wędzony). Pod koniec można tez dołożyć kawałek pokrojonej w półplasterki kiełbasy. </Text>
                     </ParallaxScrollView>
                 </View>
                 <View key="5">
@@ -320,11 +373,40 @@ const dynamicRecipes = () => {
                                     height: 700,
                                     width: 700
                                 }]}
+                                source={require('../../../assets/images/mockup/67740932-v-1080x1506.jpg')}
+                            />
+                        }>
+                        <Text style={[{ color: 'rgb(255, 255, 255)', fontSize: 22 }]}>Krok 2: Ugotuj makaron</Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)', fontSize: 16 }]}>W trakcie smażenia cebuli ugotuj makaron. Wybrałam makaron pszenny świderki, ale możesz też sięgnąć po makaron spaghetti, tagliatelle, czy też w kształcie kokardek, muszelek, rurek czy piórek. Do garnka wlej wodę i zagotuj. Na ugotowanie 300 gramów suchego makaronu potrzebujesz 3 l wody. Wodę posól dopiero, gdy zacznie się gotować. Do wrzątku wsyp płaską łyżeczkę soli. W garnku umieść makaron i gotuj al dente według zaleceń z opakowania. W trakcie gotowania zamieszaj makaron. Ugotowany makaron przełóż na durszlak w zlewie a potem do miski. Tym razem wyszło mi około 720 gramów ugotowanego makaronu.
+
+                            Porada: Makaron pszenny można śmiało wymienić na makaron pełnoziarnisty pszenny lub pszenny orkiszowy albo gryczany. </Text>
+
+                        <Text style={[{ color: 'rgb(236, 181, 0)', fontSize: 30 }]}>
+                            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                        </Text>
+                    </ParallaxScrollView>
+                </View>
+                <View key="6">
+                    <ParallaxScrollView
+                        headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+                        headerImage={
+                            <Image
+                                style={[styles.logo, {
+
+                                    height: 700,
+                                    width: 700
+                                }]}
                                 source={require('../../../assets/images/mockup/67740871-v-720x720.jpg')}
                             />
                         }>
-                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Krok 3: Całość podawaj z twarogiem</Text>
-                        <Text style={[{ color: 'rgb(255, 255, 255)' }]}>Na ugotowany makaron wyłóż całą zawartość patelni, a następnie pokruszony w dłoniach twaróg (u mnie chudy, ale może być też tłustszy lub twaróg typu krajanka). Dopiero gotowe danie oprósz świeżo mielonym pieprzem i podawaj. </Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)', fontSize: 22 }]}>Krok 3: Całość podawaj z twarogiem</Text>
+                        <Text style={[{ color: 'rgb(255, 255, 255)', fontSize: 16 }]}>Na ugotowany makaron wyłóż całą zawartość patelni, a następnie pokruszony w dłoniach twaróg (u mnie chudy, ale może być też tłustszy lub twaróg typu krajanka). Dopiero gotowe danie oprósz świeżo mielonym pieprzem i podawaj. </Text>
                     </ParallaxScrollView>
                 </View>
             </pagerView.AnimatedPagerView>

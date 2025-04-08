@@ -62,7 +62,7 @@ const TabBar: React.FC<BottomTabBarProps> = ({ state, descriptors, navigation })
 const styles = StyleSheet.create({
     tabbar: {
         position: 'absolute',
-        bottom: 25,
+        bottom: 15,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
