@@ -1,10 +1,12 @@
-import { View, StyleSheet, ScrollView, FlatList, TextInput, Image, TouchableOpacity, Pressable } from 'react-native'
+import { View, StyleSheet, ScrollView, FlatList, TextInput, Image, TouchableOpacity, Pressable, Modal } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import React, { ReactNode, useState } from 'react'
-import { Appbar, Avatar, Button, Card, DefaultTheme, Divider, Text } from 'react-native-paper';
+import React, { ReactNode, useRef, useState } from 'react'
+import { Appbar, Avatar, Button, Card, DefaultTheme, Divider, PaperProvider, Text } from 'react-native-paper';
 import PagerView from 'react-native-pager-view';
 import { MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import MyMenu from '@/components/Menu';
+import { MenuOption, MenuOptions, MenuProvider, MenuTrigger, Menu } from 'react-native-popup-menu';
 
 
 
@@ -15,11 +17,13 @@ const account = () => {
   const [isChipActivated, setChipActivated] = useState<boolean>(false);
 
 
+
   type ItemData = {
     id: string;
     title: string;
     picId: number;
-    index: number
+    index: number;
+    modal: boolean;
   };
 
   const Chip = (activate: boolean) => {
@@ -41,7 +45,7 @@ const account = () => {
             alignItems: 'center',
 
           }}>
-            <Text style={{ flex: 1, color: "rgb(255, 255, 255)" }} variant="labelMedium">{index}</Text>
+            <Text style={{ flex: 1, color: "rgb(33, 33, 33)" }} variant="labelMedium">{index}</Text>
           </View>
         </View >
       ))
@@ -109,6 +113,7 @@ const account = () => {
         width: 150,
         overflow: 'hidden',
       }}>
+
         <Image
           style={[styles.logo, {
 
@@ -117,118 +122,151 @@ const account = () => {
           }]}
           source={{ uri: `https://picsum.photos/id/${props.picId}/700/700` }}
         />
+
+
+
       </View>
     </View>
   )
 
 
-  const Item = (item: ItemData) => (
+  const Item = (item: ItemData) => {
 
 
 
-    <Pressable style={{
-      flexDirection: 'row', paddingLeft: 30,
-      paddingRight: 30,
-      height: 'auto'
 
-    }}
-      onPress={
-        () => {
+    return (
+
+
+
+      <Menu >
+        <MenuTrigger triggerOnLongPress={true} onAlternativeAction={() => {
           console.log(item.title)
           router.push({ pathname: '/recipes/[id]', params: { id: item.id } })
-          //router.navigate('/',  { id: 'bacon' } )
-        }
-      }
-      android_ripple={
-        {
-          color: 'rgb(255, 136, 0)',
-          borderless: false,
-          foreground: false
-        }
-      }
-    >
+
+        }}
+          style={{
+            flexDirection: 'row', paddingLeft: 30,
+            paddingRight: 30,
+            height: 'auto'
+          }}
+        >
 
 
-      <MyImage picId={item.picId}></MyImage>
+          <MyImage picId={item.picId}></MyImage>
 
-      <View style={{
-        width: '90%',
-        flexDirection: 'column',
-
-        justifyContent: 'space-between',
-        paddingTop: 10,
-        paddingLeft: 20,
-        paddingRight: 50,
-
-        paddingBottom: 10,
-      }}>
-        <View>
-
-          <Text style={[styles.cardText,]} variant="titleLarge">{item.title}</Text>
 
           <View style={{
-            padding: 3
+            width: '90%',
+            flexDirection: 'column',
+
+            justifyContent: 'space-between',
+            paddingTop: 10,
+            paddingLeft: 20,
+            paddingRight: 50,
+
+            paddingBottom: 10,
+
+
           }}>
 
+            <View>
 
-
-            <View style={{
-              flexDirection: 'row',
-              alignItems: 'flex-start',
-              alignSelf: 'flex-start',
-              paddingTop: 3
-            }}>
+              <Text style={[styles.cardText,]} variant="titleLarge">{item.title}</Text>
 
               <View style={{
-                flexDirection: 'row',
-                flex: 1
-              }}>
-                <MaterialIcons size={26} name="schedule" color={'rgb(255, 255, 255)'} />
-                <Text style={[{ color: 'rgb(255, 255, 255)' }]} variant="bodyMedium">30min</Text>
-              </View>
+                padding: 3,
 
-              <View style={{
-                flexDirection: 'row',
-                flex: 1
               }}>
-                <MaterialIcons size={26} name="restaurant" color={'rgb(255, 255, 255)'} />
-                <Text style={[{ color: 'rgb(255, 255, 255)' }]} variant="bodyMedium">195 kcal</Text>
-              </View>
 
+
+
+                <View style={{
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  paddingRight: 50,
+                  columnGap: 30,
+                  rowGap: 5
+                }}>
+
+                  <View style={{
+                    flexDirection: 'row',
+                  }}>
+                    <MaterialIcons size={26} name="schedule" color={"rgb(117, 117, 117)"} />
+                    <Text style={[{ color: "rgb(117, 117, 117)" }]} variant="bodyMedium">30min</Text>
+                  </View>
+
+                  <View style={{
+                    flexDirection: 'row',
+
+                  }}>
+                    <MaterialIcons size={26} name="pages" color={"rgb(117, 117, 117)"} />
+                    <Text style={[{ color: "rgb(117, 117, 117)" }]} variant="bodyMedium">6</Text>
+                  </View>
+
+                  <View style={{
+                    flexDirection: 'row',
+
+                  }}>
+                    <MaterialIcons size={26} name="restaurant" color={"rgb(117, 117, 117)"} />
+                    <Text style={[{ color: "rgb(117, 117, 117)" }]} variant="bodyMedium">195 kcal</Text>
+                  </View>
+
+                </View>
+
+
+              </View>
             </View>
 
             <View style={{
               flexDirection: 'row',
-              paddingTop: 6
-              
+              alignContent: 'space-evenly',
+
+
             }}>
-              <MaterialIcons size={26} name="pages" color={'rgb(255, 255, 255)'} />
-              <Text style={[{ color: 'rgb(255, 255, 255)' }]} variant="bodyMedium">6</Text>
+              {/*
+          <MaterialIcons size={26} name="share" color={'rgb(33, 33, 33)'} style={{ flex: 1 }} />
+          <MaterialIcons size={26} name="shopping-cart" color={'rgb(33, 33, 33)'} style={{ flex: 1 }} />
+          */}
+
             </View>
+
           </View>
-        </View>
-
-        <View style={{
-          flexDirection: 'row',
-          alignContent: 'space-evenly',
 
 
-        }}>
-          <MaterialIcons size={26} name="share" color={'rgb(255, 136, 0)'} style={{ flex: 1 }} />
-          <MaterialIcons size={26} name="shopping-cart" color={'rgb(255, 136, 0)'} style={{ flex: 1 }} />
-          <MaterialIcons size={26} name="favorite" color={'rgb(255, 136, 0)'} style={{ flex: 1 }} />
-        </View>
+        </MenuTrigger>
+        <MenuOptions optionsContainerStyle={{
+          margin: '25%'
+        }}
+          customStyles={{
+            optionsContainer: {
+              borderRadius: 8,
+              borderCurve: 'continuous',
+              boxShadow: '3 5 5 0 rgba(0, 0, 0, 0.5)',
+            },
+            optionsWrapper: {
+              flexDirection: 'row',
+              columnGap: 5,
+              rowGap: 5,
+              
+              
+            }
+          }}
+        >
+          <MenuOption onSelect={() => alert(`Save`)} >
+            <MaterialIcons size={50} name="share" color={'rgb(33, 33, 33)'} style={{ flex: 1 }} />
+          </MenuOption>
+          <MenuOption onSelect={() => alert(`Delete`)} >
+            <MaterialIcons size={50} name="shopping-cart" color={'rgb(33, 33, 33)'} style={{ flex: 1 }} />
+          </MenuOption>
 
-      </View>
+        </MenuOptions>
+      </Menu>
+
+    )
+  }
 
 
-
-    </Pressable  >
-
-
-
-
-  )
 
 
   const DATA = [
@@ -268,39 +306,39 @@ const account = () => {
 
 
   return (
+    <MenuProvider>
+      <SafeAreaView style={styles.container}>
 
-    <SafeAreaView style={styles.container}>
+        <FlatList data={DATA}
+          ListHeaderComponent={Header()}
+          stickyHeaderIndices={[0]}
+          renderItem={({ item, index }) => <Item title={item.title} id={item.id} picId={item.picId} index={index} modal={false} />}
 
+          ItemSeparatorComponent={
 
-      <FlatList data={DATA}
-        ListHeaderComponent={Header()}
-        stickyHeaderIndices={[0]}
-        renderItem={({ item, index }) => <Item title={item.title} id={item.id} picId={item.picId} index={index} />}
+            (({ highlighted }) => (
+              <View style={{ paddingLeft: 20, paddingRight: 20 }}>
+                <Divider style={{ backgroundColor: 'rgb(117, 117, 117)' }} />
+              </View>
+            ))
+          }
+          keyExtractor={item => item.id}
+          onRefresh={() => {
+            setRefresing(true)
+            setTimeout(() => {
+              setRefresing(false)
+            }, 1000)
+          }
+          }
+          refreshing={isRefresing}
+          horizontal={false}
+          ListFooterComponentStyle={{ paddingBottom: 120 }}
+          ListFooterComponent={<View></View>}
 
-        ItemSeparatorComponent={
+        />
 
-          (({ highlighted }) => (
-            <View style={{ paddingLeft: 20, paddingRight: 20 }}>
-              <Divider />
-            </View>
-          ))
-        }
-        keyExtractor={item => item.id}
-        onRefresh={() => {
-          setRefresing(true)
-          setTimeout(() => {
-            setRefresing(false)
-          }, 1000)
-        }
-        }
-        refreshing={isRefresing}
-        horizontal={false}
-        ListFooterComponentStyle={{ paddingBottom: 120 }}
-        ListFooterComponent={<View></View>}
-
-      />
-
-    </SafeAreaView>
+      </SafeAreaView>
+    </MenuProvider>
 
   )
 }
@@ -329,17 +367,30 @@ const styles = StyleSheet.create({
 
   },
   cardText: {
-    color: 'rgb(255, 255, 255)',
+    color: 'rgb(33, 33, 33)',
     //textAlign: 'center',
     fontWeight: 'bold',
   },
   header: {
-    backgroundColor: 'rgb(119, 119, 119)',
+    backgroundColor: 'rgb(189, 189, 189)',
     paddingLeft: 20,
     paddingRight: 20,
   },
   logo: {
     resizeMode: 'contain',
+  },
+
+  optionsContainer: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+
+    zIndex: 20,
+    backgroundColor: 'black'
+  },
+  optionsRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 
 });
