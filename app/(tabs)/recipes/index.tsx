@@ -243,21 +243,28 @@ const account = () => {
               borderRadius: 8,
               borderCurve: 'continuous',
               boxShadow: '3 5 5 0 rgba(0, 0, 0, 0.5)',
+              justifyContent: 'center',
+              alignItems: 'center',
+              alignSelf: 'center',
+
             },
             optionsWrapper: {
               flexDirection: 'row',
-              columnGap: 5,
-              rowGap: 5,
-              
-              
+              alignContent: 'space-between',
+              padding: 10
+
             }
           }}
         >
-          <MenuOption onSelect={() => alert(`Save`)} >
-            <MaterialIcons size={50} name="share" color={'rgb(33, 33, 33)'} style={{ flex: 1 }} />
+          <MenuOption onSelect={() => alert(`Save`)} style={{
+            flex: 1,  alignItems: 'center',
+          }} >
+            <MaterialIcons size={44} name="share" color={'rgb(33, 33, 33)'} style={{ flex: 1 }} />
           </MenuOption>
-          <MenuOption onSelect={() => alert(`Delete`)} >
-            <MaterialIcons size={50} name="shopping-cart" color={'rgb(33, 33, 33)'} style={{ flex: 1 }} />
+          <MenuOption onSelect={() => alert(`Delete`)} style={{
+            flex: 1, alignItems: 'center',
+          }}>
+            <MaterialIcons size={44} name="shopping-cart" color={'rgb(33, 33, 33)'} style={{ flex: 1 }} />
           </MenuOption>
 
         </MenuOptions>
