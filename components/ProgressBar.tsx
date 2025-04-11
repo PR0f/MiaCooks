@@ -122,7 +122,7 @@ const placeholder = () => {
     )
 }
 
-const finishedBackgroundColor = 'rgb(255, 136, 0)'
+const finishedBackgroundColor = 'rgb(255, 152, 0)'
 const inProgressBackgroundColor = 'rgb(255, 255, 255)'
 
 const ProgressBar: FC<ProgressiveBarProps> = ({

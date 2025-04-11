@@ -80,7 +80,7 @@ const dynamicRecipes = () => {
             onPress={() => console.log(item.title)}
             android_ripple={
                 {
-                    color: 'rgb(255, 136, 0)',
+                    color: 'rgb(255, 152, 0)',
                     borderless: false,
                     foreground: false
                 }
@@ -123,9 +123,9 @@ const dynamicRecipes = () => {
 
 
                 }}>
-                    <MaterialIcons size={26} name="share" color={'rgb(255, 136, 0)'} style={{ flex: 1 }} />
-                    <MaterialIcons size={26} name="shopping-cart" color={'rgb(255, 136, 0)'} style={{ flex: 1 }} />
-                    <MaterialIcons size={26} name="favorite" color={'rgb(255, 136, 0)'} style={{ flex: 1 }} />
+                    <MaterialIcons size={26} name="share" color={'rgb(255, 152, 0)'} style={{ flex: 1 }} />
+                    <MaterialIcons size={26} name="shopping-cart" color={'rgb(255, 152, 0)'} style={{ flex: 1 }} />
+                    <MaterialIcons size={26} name="favorite" color={'rgb(255, 152, 0)'} style={{ flex: 1 }} />
                 </View>
 
             </View>

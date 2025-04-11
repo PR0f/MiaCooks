@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         elevation: 5,
         */
-        boxShadow: '3 5 5 0 rgba(0, 0, 0, 0.5)',
+        boxShadow: '0 3 5 3 rgba(0, 0, 0, 0.5)',
     },
     
 })

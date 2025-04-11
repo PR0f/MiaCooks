@@ -37,7 +37,7 @@ const account = () => {
         }}
         >
           <View style={{
-            backgroundColor: 'rgb(255, 136, 0)',
+            backgroundColor: 'rgb(255, 152, 0)',
             borderRadius: 20,
             borderCurve: 'continuous',
             padding: 18,
@@ -59,15 +59,16 @@ const account = () => {
         borderRadius: 25,
         borderCurve: 'continuous',
         backgroundColor: 'white',
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingTop: 8,
+        paddingBottom: 8,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        boxShadow: '0 3 5 2 rgba(0, 0, 0, 0.5)'
 
       }}>
 
-        <MaterialIcons size={28} name="search" color={'rgb(255, 136, 0)'} style={{ padding: 10 }} />
+        <MaterialIcons size={28} name="search" color={'rgb(255, 152, 0)'} style={{ padding: 10 }} />
 
         <TextInput
           style={{
@@ -83,7 +84,7 @@ const account = () => {
           defaultValue={text}
         />
 
-        <MaterialIcons size={28} name="tune" color={'rgb(255, 136, 0)'} style={{ padding: 10 }} onPress={() => setChipActivated(!isChipActivated)} />
+        <MaterialIcons size={28} name="tune" color={'rgb(255, 152, 0)'} style={{ padding: 10 }} onPress={() => setChipActivated(!isChipActivated)} />
 
       </View>
       <ScrollView horizontal={true} >
@@ -105,8 +106,8 @@ const account = () => {
 
     }]}>
       <View style={{
-        boxShadow: '3 5 5 0 rgba(0, 0, 0, 0.5)',
-        borderRadius: 8,
+        boxShadow: '0 3 5 2 rgba(0, 0, 0, 0.5)',
+        borderRadius: 25,
         borderCurve: 'continuous',
 
         height: 150,
@@ -139,15 +140,24 @@ const account = () => {
 
 
 
-      <Menu >
+      <Menu style={{
+        backgroundColor: 'white',
+        boxShadow: '0 3 5 1 rgba(0, 0, 0, 0.5)',
+        borderRadius: 10,
+        borderCurve: 'continuous',
+        marginLeft: 20,
+        marginRight: 20
+      }}>
         <MenuTrigger triggerOnLongPress={true} onAlternativeAction={() => {
           console.log(item.title)
           router.push({ pathname: '/recipes/[id]', params: { id: item.id } })
 
         }}
           style={{
-            flexDirection: 'row', paddingLeft: 30,
-            paddingRight: 30,
+            flexDirection: 'row', paddingLeft: 20,
+            paddingRight: 20,
+            paddingTop: 5,
+            paddingBottom: 5,
             height: 'auto'
           }}
         >
@@ -192,24 +202,24 @@ const account = () => {
                   <View style={{
                     flexDirection: 'row',
                   }}>
-                    <MaterialIcons size={26} name="schedule" color={"rgb(117, 117, 117)"} />
-                    <Text style={[{ color: "rgb(117, 117, 117)" }]} variant="bodyMedium">30min</Text>
+                    <MaterialIcons size={26} name="schedule" color={"rgb(140, 140, 140)"} />
+                    <Text style={[{ color: "rgb(140, 140, 140)" }]} variant="bodyMedium">30min</Text>
                   </View>
 
                   <View style={{
                     flexDirection: 'row',
 
                   }}>
-                    <MaterialIcons size={26} name="pages" color={"rgb(117, 117, 117)"} />
-                    <Text style={[{ color: "rgb(117, 117, 117)" }]} variant="bodyMedium">6</Text>
+                    <MaterialIcons size={26} name="pages" color={"rgb(140, 140, 140)"} />
+                    <Text style={[{ color: "rgb(140, 140, 140)" }]} variant="bodyMedium">6</Text>
                   </View>
 
                   <View style={{
                     flexDirection: 'row',
 
                   }}>
-                    <MaterialIcons size={26} name="restaurant" color={"rgb(117, 117, 117)"} />
-                    <Text style={[{ color: "rgb(117, 117, 117)" }]} variant="bodyMedium">195 kcal</Text>
+                    <MaterialIcons size={26} name="restaurant" color={"rgb(140, 140, 140)"} />
+                    <Text style={[{ color: "rgb(140, 140, 140)" }]} variant="bodyMedium">195 kcal</Text>
                   </View>
 
                 </View>
@@ -242,7 +252,7 @@ const account = () => {
             optionsContainer: {
               borderRadius: 8,
               borderCurve: 'continuous',
-              boxShadow: '3 5 5 0 rgba(0, 0, 0, 0.5)',
+              boxShadow: '0 3 5 3 rgba(0, 0, 0, 0.5)',
               justifyContent: 'center',
               alignItems: 'center',
               alignSelf: 'center',
@@ -257,7 +267,7 @@ const account = () => {
           }}
         >
           <MenuOption onSelect={() => alert(`Save`)} style={{
-            flex: 1,  alignItems: 'center',
+            flex: 1, alignItems: 'center',
           }} >
             <MaterialIcons size={44} name="share" color={'rgb(33, 33, 33)'} style={{ flex: 1 }} />
           </MenuOption>
@@ -315,7 +325,15 @@ const account = () => {
   return (
     <MenuProvider>
       <SafeAreaView style={styles.container}>
-
+        <View style={{
+          position: 'absolute',
+          top: 0,
+          height: '30%',
+          width: '100%',
+          backgroundColor: 'rgb(255, 152, 0)',
+          borderRadius: 20,
+          borderCurve: 'continuous',
+        }}></View>
         <FlatList data={DATA}
           ListHeaderComponent={Header()}
           stickyHeaderIndices={[0]}
@@ -324,8 +342,8 @@ const account = () => {
           ItemSeparatorComponent={
 
             (({ highlighted }) => (
-              <View style={{ paddingLeft: 20, paddingRight: 20 }}>
-                <Divider style={{ backgroundColor: 'rgb(117, 117, 117)' }} />
+              <View style={{  paddingTop: 15 }}>
+
               </View>
             ))
           }
@@ -339,7 +357,7 @@ const account = () => {
           }
           refreshing={isRefresing}
           horizontal={false}
-          ListFooterComponentStyle={{ paddingBottom: 120 }}
+          ListFooterComponentStyle={{ paddingBottom: 110 }}
           ListFooterComponent={<View></View>}
 
         />
@@ -374,14 +392,18 @@ const styles = StyleSheet.create({
 
   },
   cardText: {
-    color: 'rgb(33, 33, 33)',
+    color: 'rgb(255, 152, 0)',
     //textAlign: 'center',
     fontWeight: 'bold',
   },
   header: {
-    backgroundColor: 'rgb(189, 189, 189)',
+    backgroundColor: 'rgb(255, 152, 0)',
     paddingLeft: 20,
     paddingRight: 20,
+    paddingBottom: 3,
+    paddingTop: 10,
+
+
   },
   logo: {
     resizeMode: 'contain',

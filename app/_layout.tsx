@@ -32,8 +32,8 @@ export default function RootLayout() {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      background: 'rgb(189, 189, 189)',
-      primary: 'rgb(255, 136, 0)',
+      background: 'rgb(220, 220, 220)',
+      primary: 'rgb(255, 152, 0)',
     },
   };
 
