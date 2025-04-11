@@ -205,7 +205,7 @@ const dynamicRecipes = () => {
 
         <SafeAreaView style={styles.container}>
             <View>
-                <ProgressBar page={viewPage} style={{ zIndex: 10, backgroundColor: 'black' }}
+                <ProgressBar page={viewPage} style={{ zIndex: 10, }}
                     setPage={(_page: number) => { setViewPage(_page), pagerView.ref.current?.setPage(_page) }} tabs={[
                         {
 
@@ -245,7 +245,7 @@ const dynamicRecipes = () => {
             >
                 <View key="1">
                     <ParallaxScrollView
-                        headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+
                         headerImage={
                             <Image
                                 style={[styles.logo, {
@@ -312,7 +312,7 @@ const dynamicRecipes = () => {
                 </View>
                 <View key="2">
                     <ParallaxScrollView
-                        headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+
                         headerImage={
                             <Image
                                 style={[styles.logo, {
@@ -329,7 +329,7 @@ const dynamicRecipes = () => {
                 </View>
                 <View key="3">
                     <ParallaxScrollView
-                        headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+
                         headerImage={
                             <Image
                                 style={[styles.logo, {
@@ -346,7 +346,7 @@ const dynamicRecipes = () => {
                 </View>
                 <View key="4">
                     <ParallaxScrollView
-                        headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+
                         headerImage={
                             <Image
                                 style={[styles.logo, {
@@ -365,7 +365,7 @@ const dynamicRecipes = () => {
                 </View>
                 <View key="5">
                     <ParallaxScrollView
-                        headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+
                         headerImage={
                             <Image
                                 style={[styles.logo, {
@@ -394,7 +394,7 @@ const dynamicRecipes = () => {
                 </View>
                 <View key="6">
                     <ParallaxScrollView
-                        headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+
                         headerImage={
                             <Image
                                 style={[styles.logo, {
@@ -460,7 +460,7 @@ const styles = StyleSheet.create({
         elevation: 5,*/
     },
     cardText: {
-        color: 'rgb(0, 0, 0)',
+        color: 'rgb(117, 117, 117)',
         //textAlign: 'center',
         fontWeight: 'bold',
 
