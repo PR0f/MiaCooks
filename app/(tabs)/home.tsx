@@ -36,9 +36,13 @@ const makeWheel = (): {
     const data = Array(numberOfSegments).fill(1);
     const arcs = d3Shape.pie()(data);
 
+    //rgb(255, 152, 0)
     const colors = [
-        "#db7093", "#20b2aa", "#d63e92", "#daa520", "#ff340f", "#ff7f50", "#3cb371", "#4169e1"
+        "rgb(255, 152, 0)", "rgb(0, 0, 0)", "rgb(255, 152, 0)", "rgb(0, 0, 0)", "rgb(255, 152, 0)", "rgb(0, 0, 0)", "rgb(255, 152, 0)", "rgb(0, 0, 0)"
     ]
+    /*const colors = [
+        "#db7093", "#20b2aa", "#d63e92", "#daa520", "#ff340f", "#ff7f50", "#3cb371", "#4169e1"
+    ]*/
 
     const result = arcs.map((arc: any, index: any) => {
         const instance = d3Shape
@@ -261,7 +265,7 @@ export default function WheelOfFortune() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#545454',
+        backgroundColor: 'rgb(220, 220, 220)',
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -269,7 +273,7 @@ const styles = StyleSheet.create({
         fontSize: 32,
         fontFamily: 'Menlo',
         position: 'absolute',
-        color: 'white',
+        color: 'black',
         top: 100
     }
 });

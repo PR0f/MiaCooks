@@ -58,7 +58,7 @@ const tab = (
                                 : inProgressBackgroundColor,
                             justifyContent: 'center',
                             alignItems: 'center',
-                            borderRadius: 50,
+
                         },
                     ]}
                 >
@@ -97,33 +97,38 @@ const tab = (
     )
 }
 
-const line = () => {
+const line = (width: number) => {
 
     return (
         <View
             style={[
                 styles.line,
                 {
-                    backgroundColor: finishedBackgroundColor
+                    backgroundColor: inProgressBackgroundColor
                         ? finishedBackgroundColor
                         : inProgressBackgroundColor,
+                    width: width 
                 },
             ]}
         />
     )
 }
 
-const placeholder = () => {
+const placeholder = (width: number) => {
 
     return (
         <View
-            style={styles.line}
+            style={[
+                styles.line,
+                { width: width }
+            ]
+            }
         />
     )
 }
 
-const finishedBackgroundColor = 'rgb(255, 152, 0)'
-const inProgressBackgroundColor = 'rgb(255, 255, 255)'
+const finishedBackgroundColor = 'rgb(255, 255, 255)'
+const inProgressBackgroundColor = 'rgb(255, 152, 0)'
 
 const ProgressBar: FC<ProgressiveBarProps> = ({
     page = 0,
@@ -142,14 +147,14 @@ const ProgressBar: FC<ProgressiveBarProps> = ({
     }
 
 
-    const prevLine = shiftedPage > 0 ? line() : null
-    const nextLine = shiftedPage < tabs.length - 1 ? line() : null
+    const prevLine = shiftedPage > 0 ? line(50) : null
+    const nextLine = shiftedPage < tabs.length - 1 ? line(50) : null
 
     const prevTab = shiftedPage > 0 ? tab(page, tabs[shiftedPage - 1], setPage) : null
     const nextTab = shiftedPage < tabs.length - 1 ? tab(page, tabs[shiftedPage + 1], setPage) : null
 
-    const startLine = shiftedPage > 1 ? line() : placeholder()
-    const endLine = shiftedPage < tabs.length - 2 ? line() : placeholder()
+    const startLine = shiftedPage > 1 ? line(30) : placeholder(30)
+    const endLine = shiftedPage < tabs.length - 2 ? line(30) : placeholder(30)
 
 
 
@@ -206,15 +211,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 50,
+        borderWidth: 3,
         width: 48,
         height: 48,
+        borderColor: 'rgb(255, 255, 255)',
+        borderStyle: 'solid',
     },
     stepNoText: { color: 'white', fontWeight: 'bold', fontSize: 22 },
     label: { justifyContent: 'center', alignItems: 'center' },
     line: {
         height: 3,
         width: 40,
-        marginHorizontal: 10,
+        marginHorizontal: 0,
+
     },
 });
 

@@ -38,14 +38,16 @@ const account = () => {
         >
           <View style={{
             backgroundColor: 'rgb(255, 152, 0)',
-            borderRadius: 20,
+            borderRadius: 25,
             borderCurve: 'continuous',
-            padding: 18,
+            padding: 13,
             justifyContent: 'center',
             alignItems: 'center',
-
+            borderColor: 'rgb(255, 255, 255)',
+            borderStyle: 'solid',
+            borderWidth: 3,
           }}>
-            <Text style={{ flex: 1, color: "rgb(33, 33, 33)" }} variant="labelMedium">{index}</Text>
+            <Text style={{ flex: 1, color: "rgb(255, 255, 255)" }} variant="labelMedium">{index}</Text>
           </View>
         </View >
       ))
@@ -342,7 +344,7 @@ const account = () => {
           ItemSeparatorComponent={
 
             (({ highlighted }) => (
-              <View style={{  paddingTop: 15 }}>
+              <View style={{ paddingTop: 15 }}>
 
               </View>
             ))

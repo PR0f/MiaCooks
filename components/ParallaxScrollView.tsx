@@ -73,9 +73,12 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 32,
-    gap: 16,
+    paddingLeft: 32,
+    paddingRight: 32,
+    paddingTop: 16,
+    paddingBottom: 260,
+    gap: 8,
     overflow: 'hidden',
-    backgroundColor: 'rgb(189, 189, 189)'
+    backgroundColor: 'rgb(220, 220, 220)'
   },
 });
