@@ -273,7 +273,9 @@ const account = () => {
           }} >
             <MaterialIcons size={44} name="share" color={'rgb(33, 33, 33)'} style={{ flex: 1 }} />
           </MenuOption>
-          <MenuOption onSelect={() => alert(`Delete`)} style={{
+          <MenuOption onSelect={
+            () => router.push({ pathname: '/recipes/[id]', params: { id: item.id } })
+          } style={{
             flex: 1, alignItems: 'center',
           }}>
             <MaterialIcons size={44} name="shopping-cart" color={'rgb(33, 33, 33)'} style={{ flex: 1 }} />
@@ -330,7 +332,7 @@ const account = () => {
         <View style={{
           position: 'absolute',
           top: 0,
-          height: '30%',
+          height: 250,
           width: '100%',
           backgroundColor: 'rgb(255, 152, 0)',
           borderRadius: 20,
