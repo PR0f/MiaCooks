@@ -21,7 +21,7 @@ const shopping = () => {
 
     const handleToggle = (title: string) => {
         setExpandedSections((expandedSections) => {
-            
+
             const next = new Set(expandedSections);
             if (next.has(title)) {
                 next.delete(title);
@@ -187,14 +187,23 @@ const shopping = () => {
 
                 }
                 }
-                renderSectionHeader={({ section }) => (
+                renderSectionHeader={({ section }) => {
+                    const isExpanded = expandedSections.has(section.title);
 
-                    section.data.length > 0 ? (
-                        <Pressable onPress={() => handleToggle(section.title)}> 
+                    return section.data.length > 0 ? (
+                        <Pressable onPress={() => handleToggle(section.title)} style={{
+                            alignItems: 'center',
+                            paddingTop: 20,
+                            flexDirection: 'row',
+                        }}>
                             <Text style={{ marginLeft: 20, color: 'rgb(0, 0, 0)', fontSize: 22 }}>{section.title}</Text>
+                            <MaterialIcons size={26} name={isExpanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
+                                color={'rgb(0, 0, 0)'} style={{ marginLeft: 'auto', right: 20 }}
+                            />
+
                         </Pressable>
                     ) : null
-                )}
+                }}
                 refreshing={false}
                 horizontal={false}
                 ListFooterComponentStyle={{ paddingBottom: 110 }}
