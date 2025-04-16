@@ -22,6 +22,11 @@ const shopping = () => {
     const [data, setData] = useState<{ title: string; data: Array<{ id: number; title: string }>; }[]>(
         [
             {
+                title: 'Del',
+                data: [
+                ],
+            },
+            {
                 title: 'Main dishes',
                 data: [
                     { id: 0, title: 'Pizza' },
@@ -155,16 +160,12 @@ const shopping = () => {
                     <Text style={{ paddingLeft: 5 }}>{itemData.title}</Text>
                     <Text style={{ marginLeft: 'auto', right: 10 }}>{itemData.id} g</Text>
                     <Pressable onPress={() => {
-
-                        
-                            const result = data.map((element) => {
-                                return { ...element, data: element.data.filter(x => x.id !== itemData.id) }
-                            });
-                            setData(result);
-                        
-                            console.log(JSON.stringify(result));
-                        
-
+                        const result = data.map((element) => {
+                            return { ...element, data: element.data.filter(x => x.id !== itemData.id) }
+                        });
+                        //
+                        result[0].data.push(itemData)
+                        setData(result);
 
                     }} style={{}}>
                         <MaterialIcons size={26} style={{ right: 10 }} name="cancel" color={'rgb(255, 0, 0)'} />
