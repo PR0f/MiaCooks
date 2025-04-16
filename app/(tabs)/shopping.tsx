@@ -19,6 +19,42 @@ const shopping = () => {
     const [text, setText] = useState<string>('');
     const [expandedSections, setExpandedSections] = useState(new Set(['Sides', 'Drinks', 'Desserts']));
 
+    const [data, setData] = useState<{ title: string; data: Array<{ id: number; title: string }>; }[]>(
+        [
+            {
+                title: 'Main dishes',
+                data: [
+                    { id: 0, title: 'Pizza' },
+                    { id: 1, title: 'Burger' },
+                    { id: 2, title: 'Risotto' }
+                ],
+            },
+            {
+                title: 'Sides',
+                data: [
+                    { id: 3, title: 'French Fries' },
+                    { id: 4, title: 'Onion Rings' },
+                    { id: 5, title: 'Fried Shrimps' }
+                ],
+            },
+            {
+                title: 'Drinks',
+                data: [
+                    { id: 6, title: 'Water' },
+                    { id: 7, title: 'Coke' },
+                    { id: 8, title: 'Beer' }
+                ],
+            },
+            {
+                title: 'Desserts',
+                data: [
+                    { id: 9, title: 'Cheese Cake' },
+                    { id: 10, title: 'Ice Cream' }
+                ],
+            },
+        ]
+    )
+
     const handleToggle = (title: string) => {
         setExpandedSections((expandedSections) => {
 
@@ -33,7 +69,9 @@ const shopping = () => {
     };
 
     type ItemData = {
+        id: number;
         title: string;
+
     };
 
     const Header = () => (
@@ -114,9 +152,23 @@ const shopping = () => {
                         source={require('../../assets/images/mockup/ilustracja-tagliatelle-maksta-cartoon-vector-kreskówka-z-włoski-sos-surowe-gotowane-gniazdo-makaron-food-250913549.webp')}>
 
                     </Image>
-                    <Text style={{ paddingLeft: 5 }}>makaron suchy np. świderki</Text>
-                    <Text style={{ marginLeft: 'auto', right: 10 }}>300 g</Text>
-                    <MaterialIcons size={26} style={{ right: 10 }} name="cancel" color={'rgb(255, 0, 0)'} />
+                    <Text style={{ paddingLeft: 5 }}>{itemData.title}</Text>
+                    <Text style={{ marginLeft: 'auto', right: 10 }}>{itemData.id} g</Text>
+                    <Pressable onPress={() => {
+
+                        
+                            const result = data.map((element) => {
+                                return { ...element, data: element.data.filter(x => x.id !== itemData.id) }
+                            });
+                            setData(result);
+                        
+                            console.log(JSON.stringify(result));
+                        
+
+
+                    }} style={{}}>
+                        <MaterialIcons size={26} style={{ right: 10 }} name="cancel" color={'rgb(255, 0, 0)'} />
+                    </Pressable>
                 </View>
             </View>
 
@@ -157,7 +209,7 @@ const shopping = () => {
                 borderCurve: 'continuous',
             }}></View>
             <SectionList
-                sections={DATA}
+                sections={data}
                 extraData={expandedSections}
                 ListHeaderComponent={<View>
                     <Text style={{ marginLeft: 20, color: 'rgb(0, 0, 0)', fontSize: 22 }} >Składniki</Text>
@@ -170,7 +222,7 @@ const shopping = () => {
                     //return null if it is
                     if (!isExpanded) return null;
 
-                    return <Item title={item} />;
+                    return <Item title={item.title} id={item.id} />;
                 }
                 }
 
@@ -182,7 +234,7 @@ const shopping = () => {
                         </View>
                     ))
                 }
-                keyExtractor={(item, index) => item + index}
+                keyExtractor={(item, index) => item.id.toString()}
                 onRefresh={() => {
 
                 }
