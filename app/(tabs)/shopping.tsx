@@ -17,48 +17,55 @@ const shopping = () => {
     const { id } = useLocalSearchParams();
 
     const [text, setText] = useState<string>('');
-    const [expandedSections, setExpandedSections] = useState(new Set(['Sides', 'Drinks', 'Desserts']));
 
-    const [data, setData] = useState<{ title: string; data: Array<{ id: number; title: string }>; }[]>(
+
+    const [data, setData] = useState<{ id: number; title: string; data: Array<{ id: number; parentId: number; title: string }>; }[]>(
         [
             {
+                id: 0,
                 title: 'Del',
                 data: [
                 ],
             },
             {
+                id: 1,
                 title: 'Main dishes',
                 data: [
-                    { id: 0, title: 'Pizza' },
-                    { id: 1, title: 'Burger' },
-                    { id: 2, title: 'Risotto' }
+                    { id: 0, parentId: 1, title: 'Pizza' },
+                    { id: 1, parentId: 1, title: 'Burger' },
+                    { id: 2, parentId: 1, title: 'Risotto' }
                 ],
             },
             {
+                id: 2,
                 title: 'Sides',
                 data: [
-                    { id: 3, title: 'French Fries' },
-                    { id: 4, title: 'Onion Rings' },
-                    { id: 5, title: 'Fried Shrimps' }
+                    { id: 3, parentId: 1, title: 'French Fries' },
+                    { id: 4, parentId: 2, title: 'Onion Rings' },
+                    { id: 5, parentId: 2, title: 'Fried Shrimps' }
                 ],
             },
             {
+                id: 3,
                 title: 'Drinks',
                 data: [
-                    { id: 6, title: 'Water' },
-                    { id: 7, title: 'Coke' },
-                    { id: 8, title: 'Beer' }
+                    { id: 6, parentId: 3, title: 'Water' },
+                    { id: 7, parentId: 3, title: 'Coke' },
+                    { id: 8, parentId: 3, title: 'Beer' }
                 ],
             },
             {
+                id: 4,
                 title: 'Desserts',
                 data: [
-                    { id: 9, title: 'Cheese Cake' },
-                    { id: 10, title: 'Ice Cream' }
+                    { id: 9, parentId: 4, title: 'Cheese Cake' },
+                    { id: 10, parentId: 4, title: 'Ice Cream' }
                 ],
             },
         ]
     )
+
+    const [expandedSections, setExpandedSections] = useState(new Set(data.map(_ => _.title)));
 
     const handleToggle = (title: string) => {
         setExpandedSections((expandedSections) => {
@@ -76,7 +83,8 @@ const shopping = () => {
     type ItemData = {
         id: number;
         title: string;
-
+        parentId: number;
+        tagId: number;
     };
 
     const Header = () => (
@@ -134,43 +142,86 @@ const shopping = () => {
                 marginRight: 20,
             }}>
 
-                <View style={{
-                    backgroundColor: 'rgb(255, 255, 255)',
-                    borderRadius: 10,
-                    boxShadow: '0 3 5 1 rgba(0, 0, 0, 0.5)',
-                    borderCurve: 'continuous',
-                    padding: 1,
-                    justifyContent: 'space-around',
-                    alignItems: 'center',
-                    alignSelf: 'center',
-                    flexDirection: 'row',
+                <Pressable onPress={() => {
 
-                    width: '100%'
-                }}>
-                    <Image
-                        style={[{
-
-                            height: 70,
-                            width: 70,
-                            left: 5
-                        }]}
-                        source={require('../../assets/images/mockup/ilustracja-tagliatelle-maksta-cartoon-vector-kreskówka-z-włoski-sos-surowe-gotowane-gniazdo-makaron-food-250913549.webp')}>
-
-                    </Image>
-                    <Text style={{ paddingLeft: 5 }}>{itemData.title}</Text>
-                    <Text style={{ marginLeft: 'auto', right: 10 }}>{itemData.id} g</Text>
-                    <Pressable onPress={() => {
+                    if (itemData.parentId == 0) {
                         const result = data.map((element) => {
                             return { ...element, data: element.data.filter(x => x.id !== itemData.id) }
                         });
-                        //
-                        result[0].data.push(itemData)
-                        setData(result);
 
-                    }} style={{}}>
-                        <MaterialIcons size={26} style={{ right: 10 }} name="cancel" color={'rgb(255, 0, 0)'} />
-                    </Pressable>
-                </View>
+                        result[itemData.tagId].data.push(itemData)
+                        setData(result);
+                    }
+                }}>
+                    <View style={{
+                        backgroundColor: 'rgb(255, 255, 255)',
+                        borderRadius: 10,
+                        boxShadow: '0 3 5 1 rgba(0, 0, 0, 0.5)',
+                        borderCurve: 'continuous',
+                        padding: 1,
+                        justifyContent: 'space-around',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        flexDirection: 'row',
+
+                        width: '100%',
+
+                    }}>
+
+                        <Image
+                            style={[{
+
+                                height: 70,
+                                width: 70,
+                                left: 5,
+                                zIndex: 10,
+
+                            }]}
+                            source={require('../../assets/images/mockup/ilustracja-tagliatelle-maksta-cartoon-vector-kreskówka-z-włoski-sos-surowe-gotowane-gniazdo-makaron-food-250913549.webp')}>
+
+                        </Image>
+                        <Text style={{
+                            paddingLeft: 5,
+                            color: (itemData.parentId == 0 ? 'rgb(140, 140, 140)' : 'rgb(0, 0, 0)'), 
+                            
+                        }}>
+                            {itemData.title}
+                        </Text>
+                        <Text style={{
+                            marginLeft: 'auto', right: 10, zIndex: 10, paddingRight: 10,
+                            color: (itemData.parentId == 0 ? 'rgb(140, 140, 140)' : 'rgb(0, 0, 0)'),
+                            
+                        }}>
+                            {itemData.id} 100g
+                        </Text>
+
+                        {itemData.parentId == 0 ?
+                            <View style={{
+                                position: 'absolute',
+                                width: '90%',
+                                left: '5%',
+                                right: '5%',
+                                borderBottomColor: 'rgb(140, 140, 140)',
+                                top: '53%',
+                                borderBottomWidth: 1,
+
+                            }}>
+                            </View>
+                            :
+                            <Pressable onPress={() => {
+                                const result = data.map((element) => {
+                                    return { ...element, data: element.data.filter(x => x.id !== itemData.id) }
+                                });
+
+                                result[0].data.push(itemData)
+                                setData(result);
+
+                            }} style={{}}>
+                                <MaterialIcons size={26} style={{ right: 10 }} name="delete-outline" color={'rgb(140, 140, 140)'} />
+                            </Pressable>
+                        }
+                    </View>
+                </Pressable>
             </View>
 
         )
@@ -217,13 +268,13 @@ const shopping = () => {
                 </View>}
 
 
-                renderItem={({ section: { title }, item }) => {
+                renderItem={({ section: { title, id }, item }) => {
                     const isExpanded = expandedSections.has(title);
 
                     //return null if it is
                     if (!isExpanded) return null;
 
-                    return <Item title={item.title} id={item.id} />;
+                    return <Item title={item.title} id={item.id} parentId={id} tagId={item.parentId} />;
                 }
                 }
 
